@@ -5,7 +5,7 @@
     { name: "Inicio", href: "/" },
     { name: "Colecciones", href: "/colecciones" },
     { name: "Sobre Ágappe", href: "/sobre" },
-    { name: "Contacto", href: "/contacto" }
+     { name: "Ayuda", href: "/ayuda" }
   ];
 </script>
 
