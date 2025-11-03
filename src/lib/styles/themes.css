@@ -1,40 +1,135 @@
 :root {
-  --page-bg: #f9f7f5;
-  --card-bg: #ffffff;
-  --primary: #c8a96a;
-  --primary-deep: #b88846;
-  --accent: #c6a7d3;
-  --secondary: #2f4f4f;
-  --text-main: #2b2b2b;
-  --text-muted: #6b6b6b;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Poppins", system-ui, sans-serif;
+  /* ===== Paleta Oficial ÁGAPPE ===== */
+  --color-esmeralda: #1E3B36;   /* 1. Verde Esmeralda Profundo */
+  --color-amatista:  #7B5BAA;   /* 2. Púrpura Amatista */
+  --color-rubi:      #A5283B;   /* 3. Cereza Rubí */
+  --color-lavanda:   #C9B7E6;   /* 4. Lila / Lavanda Suave */
+  --color-oro:       #C2A773;   /* 5. Dorado Mate / Champagne */
+  --color-crema:     #F7F4EF;   /* 6. Crema Perlada / Marfil */
+  --color-grafito:   #6F6A67;   /* 7. Gris Grafito Suave */
+
+  /* ===== Derivados útiles (no toques la paleta) ===== */
+  --esmeralda-900: color-mix(in srgb, var(--color-esmeralda), #000 18%); /* más profundo */
+  --esmeralda-700: color-mix(in srgb, var(--color-esmeralda), #fff 8%);
+  --rubi-900:      color-mix(in srgb, var(--color-rubi), #000 12%);
+  --rubi-700:      color-mix(in srgb, var(--color-rubi), #fff 6%);
+  --amatista-900:  color-mix(in srgb, var(--color-amatista), #000 10%);
+  --crema-100:     color-mix(in srgb, var(--color-crema), #fff 8%);
+  --oro-700:       color-mix(in srgb, var(--color-oro), #000 10%);
+  --oro-300:       color-mix(in srgb, var(--color-oro), #fff 22%);
+
+  /* ===== Tokens funcionales ===== */
+  --page-bg: linear-gradient(
+      180deg,
+      var(--color-crema) 0%,
+      color-mix(in srgb, var(--color-crema), #fff 12%) 40%,
+      var(--color-crema) 100%
+  );
+  --surface: #ffffff;
+  --surface-2: #fcfaf6;
+
+  --primary: var(--color-oro);          /* Botones/acentos clave */
+  --primary-contrast: #241a08;          /* Texto sobre oro */
+  --accent: var(--color-amatista);
+  --secondary: var(--color-esmeralda);
+
+  --text-main: #1a1204;                 /* Café muy oscuro */
+  --text-muted: var(--color-grafito);
+
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-md: 0 6px 20px rgba(0,0,0,.10);
+  --shadow-lg: 0 12px 36px rgba(0,0,0,.14);
 }
 
-/* efecto dorado mate */
+/* ===== Base ===== */
+html, body {
+  background: var(--page-bg);
+  color: var(--text-main);
+  font-family: "Poppins", system-ui, sans-serif;
+}
+h1,h2,h3 {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+/* ===== Superficies & tarjetas ===== */
+.surface {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1rem;
+}
+
+/* ===== Botón Dorado Mate (global) ===== */
+.btn {
+  display:inline-block;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .3s ease, color .3s ease;
+}
+.btn:focus-visible{ outline: 2px solid var(--oro-700); outline-offset: 2px; }
+
+.btn--gold {
+  color: var(--primary-contrast);
+}
+.btn--gold .btn__inner {
+  background: linear-gradient(135deg, var(--oro-300), var(--color-oro) 55%, var(--oro-700));
+  box-shadow: 0 10px 28px rgba(194,167,115,.35), inset 0 -4px 10px rgba(0,0,0,.08);
+  background-size: 200% 200%;
+  animation: goldShift 7s ease infinite;
+}
+@keyframes goldShift{ 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+
+.btn--ghost .btn__inner{
+  background: transparent;
+  border: 1.6px solid var(--color-oro);
+  color: var(--color-oro);
+  box-shadow:none;
+}
+.btn--ghost:hover .btn__inner{
+  background: color-mix(in srgb, var(--color-oro), transparent 85%);
+  box-shadow: 0 6px 18px rgba(194,167,115,.25);
+}
+
+/* ===== Fondos de sección (utilidades) ===== */
+.bg-crema       { background: var(--color-crema); }
+.bg-esmeralda   { background: var(--color-esmeralda); color:#fff; }
+.bg-esmeralda-soft{
+  background: radial-gradient(1200px 600px at 10% -10%, var(--esmeralda-700), transparent 55%),
+              linear-gradient(180deg, var(--color-esmeralda), var(--esmeralda-900));
+  color:#fff;
+}
+.bg-rubi        { background: linear-gradient(180deg, var(--color-rubi), var(--rubi-900)); color:#fff; }
+.bg-amatista    { background: linear-gradient(180deg, var(--color-amatista), var(--amatista-900)); color:#fff; }
+
+/* ===== Efecto dorado (si lo usas como clase) ===== */
 .gold-foil {
   background: linear-gradient(135deg,
-    rgba(200,169,106,1) 0%,
-    rgba(184,136,70,1) 50%,
-    rgba(211,172,103,1) 100%);
+    color-mix(in srgb, var(--color-oro), white 20%) 0%,
+    var(--color-oro) 50%,
+    color-mix(in srgb, var(--color-oro), black 10%) 100%);
   color: white;
   background-size: 200% 200%;
-  box-shadow: 0 6px 20px rgba(184,136,70,0.12),
+  box-shadow: 0 6px 20px rgba(194, 167, 115, 0.3),
               inset 0 -6px 10px rgba(0,0,0,0.06);
 }
-
-.gold-foil.shimmer {
-  animation: foilShift 4s linear infinite;
-}
-
+.gold-foil.shimmer { animation: foilShift 4s linear infinite; }
 @keyframes foilShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-body {
-  background-color: var(--page-bg);
-  font-family: var(--font-sans);
-  color: var(--text-main);
-}
+/* ===== Nav/footers sugeridos (opcional) ===== */
+.header--light { background: var(--surface-2); box-shadow: var(--shadow-sm); }
+.footer--deep  { background: var(--esmeralda-900); color:#fff; }
