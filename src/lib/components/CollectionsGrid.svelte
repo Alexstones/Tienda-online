@@ -1,118 +1,129 @@
 <script lang="ts">
-	// Definimos un tipo para las colecciones (opcional, pero buena práctica)
-	interface Collection {
-		id: number;
-		title: string;
-		link: string;
-		imageClass: string; // Clase CSS para el fondo/imagen del tile
-		icon: string; // Ícono o símbolo
-	}
+  interface Collection {
+    id: number;
+    title: string;
+    description: string;
+    link: string;
+    image: string;
+  }
 
-	// Datos de tus colecciones/categorías
-	const collections: Collection[] = [
-		{ id: 1, title: 'Joyas', link: '/colecciones/joyas', imageClass: 'tile-joyas', icon: '★' },
-		{ id: 2, title: 'Prendas', link: '/colecciones/prendas', imageClass: 'tile-prendas', icon: '✨' },
-		{ id: 3, title: 'Accesorios & Regalos', link: '/colecciones/accesorios', imageClass: 'tile-accesorios', icon: '💎' },
-		{ id: 4, title: 'Velas & Esencias', link: '/colecciones/velas', imageClass: 'tile-velas', icon: '🕯️' },
-	];
+  const collections: Collection[] = [
+    {
+      id: 1,
+      title: "Jewelry",
+      description: "Curated pieces with intention.",
+      link: "/shop#jewelry",
+      image: "/images/cat-jewelry.jpg"
+    },
+    {
+      id: 2,
+      title: "Accessories",
+      description: "Unique details that elevate your style.",
+      link: "/shop#accessories",
+      image: "/images/cat-accessories.jpg"
+    },
+    {
+      id: 3,
+      title: "Beauty",
+      description: "Self-care with elegance.",
+      link: "/shop#beauty",
+      image: "/images/cat-beauty.jpg"
+    },
+    {
+      id: 4,
+      title: "Home Decor",
+      description: "Objects that bring soul into your space.",
+      link: "/shop#home-decor",
+      image: "/images/cat-home.jpg"
+    }
+  ];
 </script>
 
 <section class="collections-grid-container">
-	<div class="collections-grid">
-		{#each collections as collection}
-			<a href={collection.link} class="collection-tile {collection.imageClass}">
-				<span class="icon">{collection.icon}</span>
-				<h3>{collection.title}</h3>
-			</a>
-		{/each}
-	</div>
+  <header class="header">
+    <h2>Shop by category</h2>
+    <p>Discover treasures that match your ritual, mood and space.</p>
+  </header>
+
+  <div class="collections-grid">
+    {#each collections as collection}
+      <a href={collection.link} class="collection-tile">
+        <figure class="image-wrap">
+          <img src={collection.image} alt={collection.title} loading="lazy" />
+        </figure>
+        <div class="tile-info">
+          <h3>{collection.title}</h3>
+          <p>{collection.description}</p>
+        </div>
+      </a>
+    {/each}
+  </div>
 </section>
 
 <style>
-	/* Contenedor principal para la sección */
-	.collections-grid-container {
-		max-width: 1200px;
-		margin: 3rem auto 0; /* Espacio después de la intro */
-		padding: 0 1rem;
-	}
+  .collections-grid-container {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
 
-	/* Estilos de la cuadrícula */
-	.collections-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
-		gap: 1rem;
-	}
+  .header {
+    margin-bottom: 1.8rem;
+  }
 
-	/* Estilos de cada tile/tarjeta de colección */
-	.collection-tile {
-		/* Para que el contenido esté centrado en la parte inferior (como en la imagen de referencia) */
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-		align-items: flex-start;
+  .header h2 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
 
-		/* Dimensiones y apariencia */
-		min-height: 250px;
-		padding: 1.5rem;
-		border-radius: 12px;
-		text-decoration: none;
-		color: white; /* Color del texto sobre los fondos oscuros */
-		transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-		background-size: cover;
-		background-position: center;
-		position: relative;
-		overflow: hidden;
-	}
+  .header p {
+    color: var(--text-muted);
+    font-size: 0.96rem;
+  }
 
-	.collection-tile::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-color: rgba(0, 0, 0, 0.25); /* Sombra oscura para mejor contraste del texto */
-		z-index: 1;
-	}
-	
-	.collection-tile > * {
-		z-index: 2; /* Asegura que el texto esté sobre la capa de sombra */
-	}
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.7rem;
+  }
 
-	.collection-tile:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-	}
+  .collection-tile {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
 
-	.collection-tile h3 {
-		font-family: var(--font-serif);
-		font-size: 1.5rem;
-		margin-top: 0.5rem;
-	}
+  .image-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    background: #e7dfd4;
+  }
 
-	.icon {
-		font-size: 1.5rem;
-		color: var(--primary); /* Asumiendo que el color principal es un dorado/amarillo */
-	}
+  .image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+    transform: scale(1.02);
+    transition: transform 0.5s ease;
+  }
 
-	/* Colores/Imágenes de fondo para cada tile */
-	/* NOTA: Debes ajustar las URLs o colores de fondo para que coincidan con tus imágenes. */
-	/* Asumiré que usarás colores planos o clases que definan el fondo. */
-	
-	.tile-joyas { background-color: #A32039; /* Un tono rojo oscuro */ } 
-	.tile-prendas { background-color: #B5A875; /* Un tono dorado claro */ }
-	.tile-accesorios { background-color: #4C0B6B; /* Un tono morado oscuro */ }
-	.tile-velas { background-color: #E25822; /* Un tono naranja/terracota */ }
-	
-	/* Versión de escritorio - 4 columnas */
-	@media (min-width: 768px) {
-		.collections-grid {
-			grid-template-columns: repeat(4, 1fr);
-			gap: 1.5rem;
-		}
-		
-		.collection-tile {
-			min-height: 300px;
-		}
-	}
+  .collection-tile:hover .image-wrap img {
+    transform: scale(1.06);
+  }
+
+  .tile-info h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+
+  .tile-info p {
+    font-size: 0.94rem;
+    color: var(--text-muted);
+  }
 </style>

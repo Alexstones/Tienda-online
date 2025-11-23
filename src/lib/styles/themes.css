@@ -1,135 +1,118 @@
 :root {
-  /* ===== Paleta Oficial ÁGAPPE ===== */
-  --color-esmeralda: #1E3B36;   /* 1. Verde Esmeralda Profundo */
-  --color-amatista:  #7B5BAA;   /* 2. Púrpura Amatista */
-  --color-rubi:      #A5283B;   /* 3. Cereza Rubí */
-  --color-lavanda:   #C9B7E6;   /* 4. Lila / Lavanda Suave */
-  --color-oro:       #C2A773;   /* 5. Dorado Mate / Champagne */
-  --color-crema:     #F7F4EF;   /* 6. Crema Perlada / Marfil */
-  --color-grafito:   #6F6A67;   /* 7. Gris Grafito Suave */
+  /* TIPOGRAFÍA */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
 
-  /* ===== Derivados útiles (no toques la paleta) ===== */
-  --esmeralda-900: color-mix(in srgb, var(--color-esmeralda), #000 18%); /* más profundo */
-  --esmeralda-700: color-mix(in srgb, var(--color-esmeralda), #fff 8%);
-  --rubi-900:      color-mix(in srgb, var(--color-rubi), #000 12%);
-  --rubi-700:      color-mix(in srgb, var(--color-rubi), #fff 6%);
-  --amatista-900:  color-mix(in srgb, var(--color-amatista), #000 10%);
-  --crema-100:     color-mix(in srgb, var(--color-crema), #fff 8%);
-  --oro-700:       color-mix(in srgb, var(--color-oro), #000 10%);
-  --oro-300:       color-mix(in srgb, var(--color-oro), #fff 22%);
+  /* COLORES BASE (fondos) */
+  --bg-body: #130a05;
+  --bg-body-alt: #1b1008;
 
-  /* ===== Tokens funcionales ===== */
-  --page-bg: linear-gradient(
-      180deg,
-      var(--color-crema) 0%,
-      color-mix(in srgb, var(--color-crema), #fff 12%) 40%,
-      var(--color-crema) 100%
+  /* PALETA ÁGAPPE (vibrantes) */
+  --color-emerald: #0b7a5b;
+  --color-wine: #5b1326;
+  --color-purple: #4b164a;
+  --color-petrol: #183947;
+  --color-gold: #d7b272;
+
+  /* VERSIONES SUAVES / PASTEL */
+  --color-emerald-soft: #134e3a;
+  --color-wine-soft: #6e2133;
+  --color-purple-soft: #5b285d;
+  --color-petrol-soft: #244457;
+  --color-gold-soft: #f6ddba;
+  --color-cream: #f4eadc;
+  --color-cream-deep: #e2d3c0;
+
+  /* TEXTO */
+  --text-main: #f7efe5;
+  --text-light: #f9f1e7;
+  --text-muted: #c1aa93;
+
+  /* TARJETAS / SUPERFICIES */
+  --card-bg: rgba(19, 10, 6, 0.96);
+  --card-elevated: radial-gradient(circle at top left,
+    rgba(255, 255, 255, 0.06),
+    rgba(0, 0, 0, 0.95)
   );
-  --surface: #ffffff;
-  --surface-2: #fcfaf6;
 
-  --primary: var(--color-oro);          /* Botones/acentos clave */
-  --primary-contrast: #241a08;          /* Texto sobre oro */
-  --accent: var(--color-amatista);
-  --secondary: var(--color-esmeralda);
-
-  --text-main: #1a1204;                 /* Café muy oscuro */
-  --text-muted: var(--color-grafito);
-
-  --radius: 16px;
   --radius-lg: 24px;
-
-  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
-  --shadow-md: 0 6px 20px rgba(0,0,0,.10);
-  --shadow-lg: 0 12px 36px rgba(0,0,0,.14);
 }
 
-/* ===== Base ===== */
-html, body {
-  background: var(--page-bg);
+/* BODY GLOBAL */
+:global(body) {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(215, 178, 114, 0.35), transparent 55%),
+    linear-gradient(180deg, #120904 0%, #1a0f08 40%, #24140d 100%);
   color: var(--text-main);
-  font-family: "Poppins", system-ui, sans-serif;
-}
-h1,h2,h3 {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--font-sans);
 }
 
-/* ===== Superficies & tarjetas ===== */
+/* SUPERFICIES BÁSICAS */
 .surface {
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-}
-.card {
-  background: var(--surface);
+  background: var(--card-elevated);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 1rem;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(246, 221, 185, 0.22);
 }
 
-/* ===== Botón Dorado Mate (global) ===== */
-.btn {
-  display:inline-block;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  border: 0;
-  cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease, background .3s ease, color .3s ease;
+/* FONDOS AUXILIARES */
+.bg-crema {
+  background:
+    radial-gradient(circle at top left, rgba(242, 222, 193, 0.34), transparent 55%),
+    linear-gradient(180deg, #20120c 0%, #28150e 100%);
 }
-.btn:focus-visible{ outline: 2px solid var(--oro-700); outline-offset: 2px; }
+
+.bg-crema-deep {
+  background:
+    radial-gradient(circle at top left, rgba(244, 229, 205, 0.25), transparent 55%),
+    linear-gradient(180deg, #160c07 0%, #1e1009 100%);
+}
+
+.bg-esmeralda-soft {
+  background:
+    radial-gradient(circle at top left, rgba(11, 122, 91, 0.32), transparent 60%),
+    linear-gradient(180deg, #091410 0%, #0d1813 100%);
+}
+
+/* BOTONES GENERALES */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
 
 .btn--gold {
-  color: var(--primary-contrast);
-}
-.btn--gold .btn__inner {
-  background: linear-gradient(135deg, var(--oro-300), var(--color-oro) 55%, var(--oro-700));
-  box-shadow: 0 10px 28px rgba(194,167,115,.35), inset 0 -4px 10px rgba(0,0,0,.08);
-  background-size: 200% 200%;
-  animation: goldShift 7s ease infinite;
-}
-@keyframes goldShift{ 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
-
-.btn--ghost .btn__inner{
-  background: transparent;
-  border: 1.6px solid var(--color-oro);
-  color: var(--color-oro);
-  box-shadow:none;
-}
-.btn--ghost:hover .btn__inner{
-  background: color-mix(in srgb, var(--color-oro), transparent 85%);
-  box-shadow: 0 6px 18px rgba(194,167,115,.25);
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-soft));
+  color: #1a130c;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
 }
 
-/* ===== Fondos de sección (utilidades) ===== */
-.bg-crema       { background: var(--color-crema); }
-.bg-esmeralda   { background: var(--color-esmeralda); color:#fff; }
-.bg-esmeralda-soft{
-  background: radial-gradient(1200px 600px at 10% -10%, var(--esmeralda-700), transparent 55%),
-              linear-gradient(180deg, var(--color-esmeralda), var(--esmeralda-900));
-  color:#fff;
-}
-.bg-rubi        { background: linear-gradient(180deg, var(--color-rubi), var(--rubi-900)); color:#fff; }
-.bg-amatista    { background: linear-gradient(180deg, var(--color-amatista), var(--amatista-900)); color:#fff; }
-
-/* ===== Efecto dorado (si lo usas como clase) ===== */
-.gold-foil {
-  background: linear-gradient(135deg,
-    color-mix(in srgb, var(--color-oro), white 20%) 0%,
-    var(--color-oro) 50%,
-    color-mix(in srgb, var(--color-oro), black 10%) 100%);
-  color: white;
-  background-size: 200% 200%;
-  box-shadow: 0 6px 20px rgba(194, 167, 115, 0.3),
-              inset 0 -6px 10px rgba(0,0,0,0.06);
-}
-.gold-foil.shimmer { animation: foilShift 4s linear infinite; }
-@keyframes foilShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.btn--gold:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
 }
 
-/* ===== Nav/footers sugeridos (opcional) ===== */
-.header--light { background: var(--surface-2); box-shadow: var(--shadow-sm); }
-.footer--deep  { background: var(--esmeralda-900); color:#fff; }
+/* CHIP / PASTILLA PARA CATEGORÍAS */
+.category-chip {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: rgba(244, 234, 220, 0.08);
+  color: var(--color-gold-soft);
+  border: 1px solid rgba(246, 221, 185, 0.45);
+}

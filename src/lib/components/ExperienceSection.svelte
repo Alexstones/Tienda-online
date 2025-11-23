@@ -1,150 +1,131 @@
-<script>
-	// Aquí puedes definir props si la sección necesitara datos dinámicos.
-	// Por ahora, usaremos texto y contenido estático según tu diseño.
+<script lang="ts">
+  // static content for now
 </script>
 
 <section class="experience-section">
-	<div class="content-wrapper">
-		<div class="text-content">
-			<p class="subtitle">EXPERIENCIA ÁGAPPE</p>
-			<h1>Eres luz. Eres belleza. Eres poder.</h1>
-			<p class="description">
-				ÁGAPPE nace como un espacio de sanación para descubrir tu divino <span style="font-style: italic;">ser</span>. 
-				Aquí encuentras tesoros que brillan con tu propia luz.
-			</p>
-			</div>
-		
-		<div class="visual-content">
-			<div class="visual-placeholder red-tile">
-				<img src="/images/agappeazul.jpeg" alt="Caja Ágappe roja" />
-			</div>
-			<div class="visual-placeholder green-tile">
-				<img src="/images/agappeguinda.jpeg" alt="Caja Ágappe verde" />
-			</div>
-			<div class="visual-placeholder gold-tile">
-				<img src="/images/agappelila.jpeg" alt="Caja Ágappe dorada" />
-			</div>
-		</div>
-	</div>
+  <div class="content-wrapper">
+    <div class="text-content">
+      <p class="subtitle">ÁGAPPE EXPERIENCE</p>
+      <h1>You are light. You are beauty. You are power.</h1>
+      <p class="description">
+        Ágappe is a space to reconnect with your divine self — through treasures
+        that hold intention, energy and elegance. Each piece is a reminder of
+        the light you already carry.
+      </p>
+    </div>
 
-	<div class="cta-bottom">
-		<p>Únete a nuestra comunidad y comparte tu tesoro ÁGAPPE.</p>
-		</div>
+    <div class="visual-content">
+      <div class="visual-placeholder">
+        <img src="/images/exp-1.jpg" alt="Ágappe box and treasures" loading="lazy" />
+      </div>
+      <div class="visual-placeholder">
+        <img src="/images/exp-2.jpg" alt="Curated details and textures" loading="lazy" />
+      </div>
+      <div class="visual-placeholder">
+        <img src="/images/exp-3.jpg" alt="Soft fabrics and light" loading="lazy" />
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-bottom">
+    <p>
+      Join the Ágappe universe and share your treasure moments with us.
+    </p>
+  </div>
 </section>
 
 <style>
-	/* Los colores de fondo y texto deben coincidir con tu tema (variables CSS) */
-	.experience-section {
-		background-color: var(--primary-dark-red); /* Un color rojo oscuro/vino para el fondo */
-		color: white; /* Texto blanco para contraste */
-		padding-top: 4rem; 
-	}
-	
-	.content-wrapper {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
-		display: flex;
-		flex-direction: column; /* Apilado en móvil */
-		align-items: center;
-		gap: 2rem;
-	}
+  .experience-section {
+    background-color: var(--wine-soft);
+    color: #fff;
+    padding-top: 4rem;
+  }
 
-	.text-content {
-		max-width: 500px;
-		text-align: center;
-	}
+  .content-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+  }
 
-	.subtitle {
-		font-family: var(--font-serif);
-		font-size: 0.9rem;
-		letter-spacing: 0.15em;
-		margin-bottom: 0.5rem;
-		color: var(--primary-light-gold); /* Color dorado claro */
-	}
+  .text-content {
+    max-width: 520px;
+    text-align: center;
+  }
 
-	.text-content h1 {
-		font-family: var(--font-serif); /* Fuente elegante para títulos */
-		font-size: 2.5rem;
-		line-height: 1.2;
-		margin-bottom: 1.5rem;
-		color: white;
-	}
+  .subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
 
-	.description {
-		font-size: 1rem;
-		line-height: 1.6;
-		margin-bottom: 2rem;
-		max-width: 90%;
-		margin-left: auto;
-		margin-right: auto;
-	}
+  .text-content h1 {
+    font-family: var(--font-serif);
+    font-size: 2.3rem;
+    line-height: 1.2;
+    margin-bottom: 1.3rem;
+  }
 
-	/* Contenido Visual (los pequeños cuadros) */
-	.visual-content {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0.5rem;
-		max-width: 300px; /* Asegura que no sea demasiado ancho */
-	}
-	
-	.visual-placeholder {
-		/* Puedes usar esto para estilizar las cajas si no usas imágenes reales */
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		aspect-ratio: 1 / 1.4; /* Relación de aspecto vertical */
-		border-radius: 4px;
-		overflow: hidden;
-	}
-	
-	.visual-placeholder img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+  .description {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    opacity: 0.93;
+  }
 
-	/* Estilos para el texto de abajo */
-	.cta-bottom {
-		background-color: var(--primary-deep-green); /* El color verde oscuro de tu Hero */
-		padding: 1.5rem 1rem;
-		text-align: center;
-		font-weight: 500;
-		margin-top: 4rem; /* Separa del contenido superior */
-	}
-	
-	.cta-bottom p {
-		max-width: 900px;
-		margin: 0 auto;
-		font-size: 1.1rem;
-	}
+  .visual-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    max-width: 340px;
+  }
 
+  .visual-placeholder {
+    border-radius: 10px;
+    overflow: hidden;
+  }
 
-	/* Desktop Styles */
-	@media (min-width: 768px) {
-		.content-wrapper {
-			flex-direction: row; /* Uno al lado del otro en escritorio */
-			justify-content: space-between;
-			align-items: flex-start;
-			padding: 4rem 1rem;
-		}
+  .visual-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+  }
 
-		.text-content {
-			text-align: left;
-			max-width: 50%;
-			padding-right: 2rem;
-		}
+  .cta-bottom {
+    background-color: var(--emerald);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    margin-top: 3.5rem;
+  }
 
-		.description {
-			margin-left: 0;
-			margin-right: 0;
-		}
-		
-		.visual-content {
-			/* Mover la posición de las cajas para que se parezcan más al diseño */
-			max-width: 450px;
-			align-self: center;
-			/* Se puede usar grid-area o posicionamiento absoluto si se busca el efecto de superposición exacto */
-		}
-	}
+  .cta-bottom p {
+    max-width: 880px;
+    margin: 0 auto;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4rem 1rem;
+    }
+
+    .text-content {
+      text-align: left;
+      max-width: 50%;
+      padding-right: 2rem;
+    }
+
+    .visual-content {
+      max-width: 420px;
+    }
+  }
 </style>

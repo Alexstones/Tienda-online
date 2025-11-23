@@ -1,42 +1,68 @@
-<script>
-  export let product;
+<script lang="ts">
+  export let product: {
+    name: string;
+    category: string;
+    price: string;
+    image: string;
+  };
 </script>
 
 <article class="product-card">
   <div class="product-image">
-    <img src={product.image} alt={product.title} />
+    <img src={product.image} alt={product.name} loading="lazy" />
   </div>
-  <h3>{product.title}</h3>
-  <p class="tag">{product.category}</p>
-  <button class="btn btn--gold">Ver</button>
+  <div class="product-info">
+    <p class="category">{product.category}</p>
+    <h3>{product.name}</h3>
+    <p class="price">{product.price}</p>
+  </div>
 </article>
 
 <style>
   .product-card {
-    background: var(--card-bg);
-    border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: #f4ede3;
+    border-radius: 20px;
     padding: 1rem;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  .product-card:hover {
-    transform: translateY(-6px);
-  }
-  .product-image {
-    height: 180px;
+    box-shadow: 0 16px 38px rgba(15, 10, 5, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: color-mix(in oklab, var(--accent) 20%, var(--card-bg) 80%);
-    border-radius: 0.8rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 0.7rem;
   }
-  img { max-height: 160px; object-fit: contain; }
-  .tag {
-    font-size: 0.9rem;
+
+  .product-image {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #e8e0d5;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+    transform: scale(1.02);
+    transition: transform 0.45s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.06);
+  }
+
+  .category {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 0.6rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .price {
+    font-size: 0.95rem;
+    color: var(--wine);
   }
 </style>
-

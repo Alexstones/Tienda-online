@@ -1,252 +1,242 @@
 <script lang="ts">
-    // --- ESTADO Y LÓGICA DEL TEST INTERACTIVO ---
-    let currentStep = 1; // 1: Inicio, 2: Pregunta, 3: Resultado
-    let selectedVibration: 'CALMA' | 'ÉXITO' | 'AMOR' | null = null;
+  let currentStep: 1 | 2 | 3 = 1;
+  let selectedVibration: "CALM" | "SUCCESS" | "LOVE" | null = null;
 
-    // Datos del resultado, con colores y sugerencias para ÁGAPPE
-    const results = {
-        CALMA: {
-            color: '#0D3627', // Un verde oscuro y terroso (para el borde del resultado)
-            vibration: "CALMA Y CONEXIÓN",
-            message: "Tu alma pide un respiro. Busca la serenidad en los pequeños rituales. Tu energía se centrará en el presente.",
-            suggestion: "Joyería con Amatista o Cuarzo Ahumado."
-        },
-        ÉXITO: {
-            color: '#B3914B', // Dorado profundo
-            vibration: "ÉXITO Y ABUNDANCIA",
-            message: "Estás lista para manifestar tus mayores deseos. Focaliza tu energía para atraer la prosperidad y el coraje.",
-            suggestion: "Joyería con Citrino o Piedra del Sol."
-        },
-        AMOR: {
-            color: '#6E1B3B', // Un rojo vino/magia (similar a tu Hero oscuro)
-            vibration: "AMOR Y COMPASIÓN",
-            message: "Tu corazón está abierto. Conéctate con el amor propio y comparte tu luz. El universo te lo devolverá multiplicado.",
-            suggestion: "Joyería con Cuarzo Rosa o Esencias Florales."
-        },
-    };
+  const results = {
+    CALM: {
+      color: "#0D3627",
+      vibration: "CALM & CONNECTION",
+      message:
+        "Your soul is asking for softness. Slow down, breathe and choose pieces that anchor you into the present moment.",
+      suggestion: "Jewelry with amethyst or smoky quartz."
+    },
+    SUCCESS: {
+      color: "#B3914B",
+      vibration: "SUCCESS & ABUNDANCE",
+      message:
+        "You are ready to move. Focus your energy, set clear intentions and choose treasures that remind you of your power.",
+      suggestion: "Jewelry with citrine or sunstone."
+    },
+    LOVE: {
+      color: "#6E1B3B",
+      vibration: "LOVE & COMPASSION",
+      message:
+        "Your heart is open. Nourish self-love and allow yourself to be held by beauty, softness and kind rituals.",
+      suggestion: "Jewelry with rose quartz or soft floral essences."
+    }
+  };
 
-    // Función que inicia el test y avanza al paso de preguntas
-    function startTest() {
-        currentStep = 2;
-    }
+  function startTest() {
+    currentStep = 2;
+  }
 
-    // Función que selecciona una opción y avanza al resultado
-    function selectOption(vibration: 'CALMA' | 'ÉXITO' | 'AMOR') {
-        selectedVibration = vibration;
-        currentStep = 3;
-    }
-    
-    // Función para reiniciar
-    function resetTest() {
-        currentStep = 1;
-        selectedVibration = null;
-    }
+  function selectOption(vibration: "CALM" | "SUCCESS" | "LOVE") {
+    selectedVibration = vibration;
+    currentStep = 3;
+  }
+
+  function resetTest() {
+    currentStep = 1;
+    selectedVibration = null;
+  }
 </script>
 
 <main class="ritual-page">
-
-    {#if currentStep === 1}
-        <div class="ritual-card start-screen">
-            <span class="icon">🔮</span>
-            <h1 class="title">¿Qué Vibra Hoy?</h1>
-            <p class="message">Un momento para conectar con tu energía actual y descubrir el tesoro ÁGAPPE ideal para ti.</p>
-            <button on:click={startTest} class="btn btn--gold">Iniciar Conexión</button>
-        </div>
-
-    {:else if currentStep === 2}
-        <div class="ritual-card question-screen">
-            <h2 class="title-small">Pregunta Única:</h2>
-            <p class="message">¿Cuál de estas intenciones necesitas elevar hoy?</p>
-            
-            <div class="options-grid">
-                <button on:click={() => selectOption('CALMA')} class="btn btn--option btn--calma">CALMA</button>
-                <button on:click={() => selectOption('ÉXITO')} class="btn btn--option btn--exito">ÉXITO</button>
-                <button on:click={() => selectOption('AMOR')} class="btn btn--option btn--amor">AMOR</button>
-            </div>
-            <button on:click={resetTest} class="btn btn--ghost-small">Reiniciar</button>
-        </div>
-
-    {:else if currentStep === 3 && selectedVibration}
-        {@const result = results[selectedVibration]}
-        <div class="ritual-card result-screen" style="--result-color: {result.color};">
-            <span class="icon-result">✨</span>
-            <h3 class="result-label">Tu Energía de Hoy es:</h3>
-            <h2 class="result-vibration">{result.vibration}</h2>
-            <p class="message-result">{result.message}</p>
-            
-            <div class="suggestion-box">
-                <p>Nuestra sugerencia ÁGAPPE:</p>
-                <strong>{result.suggestion}</strong>
-            </div>
-
-            <a href="/colecciones" class="btn btn--gold">Ver Colecciones por Intención</a>
-            <button on:click={resetTest} class="btn btn--ghost-small">Hacer el Test de Nuevo</button>
-        </div>
-    {/if}
-
+  {#if currentStep === 1}
+    <div class="ritual-card start">
+      <span class="icon">🔮</span>
+      <h1 class="title">What is vibing today?</h1>
+      <p class="message">
+        Take a moment to connect with your energy and discover the Ágappe treasure that resonates with you today.
+      </p>
+      <button on:click={startTest} class="btn-gold">Start</button>
+    </div>
+  {:else if currentStep === 2}
+    <div class="ritual-card question">
+      <h2 class="title-small">One simple question</h2>
+      <p class="message">Which intention do you need to elevate today?</p>
+      <div class="options-grid">
+        <button on:click={() => selectOption("CALM")} class="btn-option btn-calm">CALM</button>
+        <button on:click={() => selectOption("SUCCESS")} class="btn-option btn-success">SUCCESS</button>
+        <button on:click={() => selectOption("LOVE")} class="btn-option btn-love">LOVE</button>
+      </div>
+      <button on:click={resetTest} class="btn-reset">Reset</button>
+    </div>
+  {:else if currentStep === 3 && selectedVibration}
+    {@const result = results[selectedVibration]}
+    <div class="ritual-card result" style={`--result-color:${result.color}`}>
+      <span class="icon-result">✨</span>
+      <h3 class="result-label">Your energy today</h3>
+      <h2 class="result-vibration">{result.vibration}</h2>
+      <p class="message-result">{result.message}</p>
+      <div class="suggestion-box">
+        <p>Ágappe suggestion:</p>
+        <strong>{result.suggestion}</strong>
+      </div>
+      <a href="/shop" class="btn-gold">See pieces by intention</a>
+      <button on:click={resetTest} class="btn-reset">Take the test again</button>
+    </div>
+  {/if}
 </main>
 
 <style>
-    /* --- VARIABLES DE ESTILO --- */
-    :global(:root) {
-        --gold-text: #E4C894; 
-        --font-serif: "Georgia", serif; 
-    }
-    
-    /* Estilos generales de la página */
-    .ritual-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 80vh;
-        text-align: center;
-        background-color: #1a1a1a; /* Fondo muy oscuro para el contraste de lujo */
-        padding: 4rem 1rem;
-    }
+  .ritual-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    background-color: #191716;
+    padding: 4rem 1rem;
+  }
 
-    .ritual-card {
-        max-width: 500px;
-        background: #252525;
-        color: white;
-        padding: 3rem;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+  .ritual-card {
+    max-width: 520px;
+    background: #262220;
+    color: #fff;
+    padding: 3rem 2.4rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
 
-    .title {
-        font-family: var(--font-serif);
-        font-size: 2.5rem;
-        color: var(--gold-text);
-        margin-bottom: 1.5rem;
-    }
-    
-    .title-small {
-        font-family: var(--font-serif);
-        font-size: 1.8rem;
-        color: var(--gold-text);
-        margin-bottom: 1rem;
-    }
+  .title {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    color: var(--gold-soft);
+    margin-bottom: 1.4rem;
+  }
 
-    .icon {
-        font-size: 3rem;
-        display: block;
-        margin-bottom: 1rem;
-    }
-    
-    .message {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
-        color: #ccc;
-    }
-    
-    /* Estilos de botones generales */
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 0.8rem 2rem;
-        border-radius: 999px;
-        text-decoration: none;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s, opacity 0.2s;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
+  .title-small {
+    font-family: var(--font-serif);
+    font-size: 1.7rem;
+    color: var(--gold-soft);
+    margin-bottom: 1rem;
+  }
 
-    .btn--gold {
-        background: linear-gradient(135deg, var(--gold-text), #c7a76c);
-        color: #1a1a1a;
-        border: none;
-    }
-    .btn--gold:hover {
-        transform: translateY(-2px);
-        opacity: 0.9;
-    }
-    
-    .btn--ghost-small {
-        display: inline-block;
-        width: auto;
-        font-size: 0.9rem;
-        background: none;
-        color: #ccc;
-        border: none;
-        text-decoration: underline;
-        margin-top: 1rem;
-        cursor: pointer;
-    }
+  .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
 
-    /* Estilos de opciones de pregunta */
-    .options-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
+  .message {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: #dcd3cc;
+  }
 
-    .btn--option {
-        background: none;
-        border: 2px solid;
-        color: white;
-        font-size: 1.1rem;
-    }
-    
-    /* Colores únicos para cada opción */
-    .btn--calma { border-color: #0D3627; }
-    .btn--calma:hover { background-color: #0D3627; }
-    
-    .btn--exito { border-color: #B3914B; }
-    .btn--exito:hover { background-color: #B3914B; }
-    
-    .btn--amor { border-color: #6E1B3B; }
-    .btn--amor:hover { background-color: #6E1B3B; }
-    
-    /* Estilos de la pantalla de resultado */
-    .result-screen {
-        border-left: 5px solid var(--result-color); /* Borde con color de resultado */
-        background: #181818;
-    }
+  .btn-gold {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.82rem;
+    border: none;
+    background: radial-gradient(circle at top left, var(--gold-soft), #c6a464);
+    color: #241f17;
+  }
 
-    .icon-result {
-        font-size: 2.5rem;
-        display: block;
-        color: var(--gold-text);
-        margin-bottom: 0.5rem;
-    }
-    
-    .result-label {
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #aaa;
-    }
-    
-    .result-vibration {
-        font-family: var(--font-serif);
-        font-size: 2.2rem;
-        color: var(--result-color);
-        margin-bottom: 1rem;
-    }
-    
-    .message-result {
-        color: #eee;
-        font-style: italic;
-        margin-bottom: 2rem;
-    }
-    
-    .suggestion-box {
-        background-color: #2c2c2c;
-        padding: 1rem;
-        border-radius: 6px;
-        margin-bottom: 2rem;
-        color: #ddd;
-    }
-    
-    .suggestion-box strong {
-        color: var(--gold-text);
-        display: block;
-        margin-top: 0.3rem;
-        font-size: 1.1rem;
-    }
+  .btn-reset {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-size: 0.9rem;
+    background: none;
+    color: #d0c4b8;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn-option {
+    padding: 0.9rem 1.8rem;
+    border-radius: 999px;
+    border: 2px solid;
+    background: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .btn-calm {
+    border-color: #0d3627;
+  }
+  .btn-calm:hover {
+    background-color: #0d3627;
+  }
+
+  .btn-success {
+    border-color: #b3914b;
+  }
+  .btn-success:hover {
+    background-color: #b3914b;
+  }
+
+  .btn-love {
+    border-color: #6e1b3b;
+  }
+  .btn-love:hover {
+    background-color: #6e1b3b;
+  }
+
+  .result {
+    border-left: 5px solid var(--result-color);
+    background: #201c1a;
+  }
+
+  .icon-result {
+    font-size: 2.4rem;
+    display: block;
+    color: var(--gold-soft);
+    margin-bottom: 0.6rem;
+  }
+
+  .result-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #b5a89b;
+  }
+
+  .result-vibration {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--result-color);
+    margin-bottom: 1rem;
+  }
+
+  .message-result {
+    color: #e2d7cc;
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .suggestion-box {
+    background-color: #2b2623;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    color: #ddd0c2;
+  }
+
+  .suggestion-box strong {
+    color: var(--gold-soft);
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 1.05rem;
+  }
 </style>

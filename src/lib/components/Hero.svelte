@@ -1,79 +1,102 @@
-<script>
-  export let title = "Bienvenida, Creadora ✨";
-  export let subtitle = "Ágappe — un universo de tesoros con alma.";
+<script lang="ts">
+  export let title = "ÁGAPPE";
+  export let subtitle = "Curated treasures for the modern goddess.";
+  export let image = "/images/hero-main.jpg";
 </script>
 
-<section class="hero bg-esmeralda-soft">
-  <div class="hero__content">
-    <h1 class="hero__title">{title}</h1>
-    <p class="hero__subtitle">{subtitle}</p>
+<section class="hero">
+  <div class="hero-media">
+    <img src={image} alt={title} loading="eager" />
+  </div>
+  <div class="hero-content">
+    <h1>{title}</h1>
+    <p class="subtitle">{subtitle}</p>
 
-    <div class="hero__actions">
-      <a href="/colecciones" class="btn btn--gold btn--shine">
-        <span class="btn__inner"><span class="btn__text">✨ Descubrir Tesoros</span></span>
-      </a>
-      <a href="/ritual" class="btn btn--ghost btn--pulse">
-        <span class="btn__inner"><span class="btn__text">🔮 ¿Qué vibra hoy?</span></span>
-      </a>
+    <div class="actions">
+      <a href="/shop" class="btn-primary">Shop now</a>
+      <a href="/curate" class="btn-ghost">Explore Curate</a>
     </div>
   </div>
 </section>
 
 <style>
-  .hero{
-    position: relative;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding: clamp(3rem, 6vw, 5rem) 1.5rem;
-    min-height: 68vh;
-    overflow:hidden;
-  }
-  /* halo suave dorado */
-  .hero::after{
-    content:"";
-    position:absolute; inset:-20% -10% auto auto;
-    width:45vmax; height:45vmax; border-radius:50%;
-    background: radial-gradient(circle at 50% 50%,
-      color-mix(in srgb, var(--color-oro), transparent 70%) 0%,
-      transparent 65%);
-    filter: blur(30px);
-    pointer-events:none;
-  }
-  .hero__content{
-    width:min(100%, 940px);
-    margin-inline:auto;
-  }
-  .hero__title{
-    font-family:"Playfair Display", Georgia, serif;
-    font-size: clamp(2.6rem, 6vw, 4rem);
-    font-weight: 700;
-    letter-spacing:.2px;
-    color:#fff;
-  }
-  .hero__subtitle{
-    margin-top: .9rem;
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    color: var(--color-oro);
-  }
-  .hero__actions{
-    margin-top: 1.6rem;
-    display:flex; gap:.9rem; flex-wrap: wrap;
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+    min-height: 60vh;
   }
 
-  .btn { border-radius: 999px; padding:0; }
-  .btn__inner{ display:inline-block; padding:.9rem 1.6rem; border-radius:inherit; position:relative; overflow:hidden; }
-  .btn__text{ font-weight:600; font-size:1rem; }
-
-  /* brillo de pasada */
-  .btn--shine .btn__inner::before{
-    content:""; position:absolute; top:0; left:-75%;
-    width:50%; height:100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.1) 100%);
-    transform: skewX(-25deg); transition: left .7s ease;
+  .hero-media img {
+    width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.22);
   }
-  .btn--shine:hover .btn__inner::before{ left: 125%; }
 
-  .btn--pulse:hover{ animation:pulse .8s ease; }
-  @keyframes pulse{ 0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)} }
+  .hero-content h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 4vw, 3.3rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 1.8rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.8rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-primary {
+    background: radial-gradient(circle at top left, var(--gold-soft), #f3e7cf);
+    color: #2a2318;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.17);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--emerald);
+  }
+
+  .btn-ghost:hover {
+    background: #efe6d8;
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-media {
+      order: -1;
+    }
+  }
 </style>
