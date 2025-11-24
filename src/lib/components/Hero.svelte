@@ -1,101 +1,142 @@
-<script lang="ts">
+<script>
   export let title = "ÁGAPPE";
-  export let subtitle = "Curated treasures for the modern goddess.";
-  export let image = "/images/hero-main.jpg";
+  export let subtitle = "Elegance. Beauty. Intention.";
 </script>
 
 <section class="hero">
-  <div class="hero-media">
-    <img src={image} alt={title} loading="eager" />
-  </div>
-  <div class="hero-content">
-    <h1>{title}</h1>
-    <p class="subtitle">{subtitle}</p>
+  <div class="hero-inner">
+    <div class="copy">
+      <p class="eyebrow">Curated treasures for the modern goddess</p>
+      <h1>{title}</h1>
+      <p class="subtitle">
+        A boutique of treasures where every piece is selected with intention,
+        elegance and soul — never by volume, always by curation.
+      </p>
 
-    <div class="actions">
-      <a href="/shop" class="btn-primary">Shop now</a>
-      <a href="/curate" class="btn-ghost">Explore Curate</a>
+      <div class="actions">
+        <a href="/shop" class="btn btn-primary">Shop now</a>
+        <a href="/curate" class="btn btn-ghost">Explore Ágappe Curate</a>
+      </div>
     </div>
+
+    <figure class="visual" aria-hidden="true">
+      <!-- usa un caballo elegante / editorial aquí -->
+      <img src="/images/agape.jpeg" alt="" />
+      <div class="halo"></div>
+    </figure>
   </div>
 </section>
 
 <style>
   .hero {
+    padding: clamp(3rem, 6vw, 4.5rem) 0 3rem;
+  }
+
+  .hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 3rem;
     align-items: center;
-    min-height: 60vh;
   }
 
-  .hero-media img {
-    width: 100%;
-    border-radius: 24px;
-    object-fit: cover;
-    aspect-ratio: 4 / 3;
-    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.22);
-  }
-
-  .hero-content h1 {
+  .copy h1 {
     font-family: var(--font-serif);
-    font-size: clamp(2.6rem, 4vw, 3.3rem);
-    letter-spacing: 0.22em;
+    font-size: clamp(2.6rem, 4vw, 3.6rem);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: 0.8rem;
+    color: var(--wine);
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    color: var(--petrol);
+    margin-bottom: 0.6rem;
   }
 
   .subtitle {
     font-size: 1.05rem;
-    color: var(--text-muted);
-    margin-bottom: 1.8rem;
+    line-height: 1.7;
+    max-width: 32rem;
+    color: var(--text-main);
   }
 
   .actions {
     display: flex;
-    gap: 0.9rem;
     flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
   }
 
-  .btn-primary,
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.85rem 1.8rem;
+  .btn {
     border-radius: 999px;
+    padding: 0.7rem 1.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.8rem;
+    letter-spacing: 0.14em;
     text-decoration: none;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
 
   .btn-primary {
-    background: radial-gradient(circle at top left, var(--gold-soft), #f3e7cf);
-    color: #2a2318;
-    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.17);
+    background: linear-gradient(120deg, var(--gold), var(--emerald));
+    color: #432d1d;
+    border: none;
+    box-shadow: 0 10px 24px rgba(160, 123, 70, 0.35);
   }
 
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+    filter: brightness(1.05);
   }
 
   .btn-ghost {
-    background: transparent;
-    color: var(--emerald);
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--text-main);
   }
 
   .btn-ghost:hover {
-    background: #efe6d8;
+    background: rgba(255, 255, 255, 1);
+  }
+
+  .visual {
+    position: relative;
+    border-radius: 999px;
+    overflow: hidden;
+    padding: 0.35rem;
+    background: radial-gradient(circle at top, var(--gold-soft), var(--wine-soft));
+  }
+
+  .visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+  }
+
+  .halo {
+    position: absolute;
+    inset: 12%;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow: 0 40px 80px rgba(122, 32, 53, 0.4);
   }
 
   @media (max-width: 860px) {
-    .hero {
-      grid-template-columns: 1fr;
+    .hero-inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.3rem;
     }
 
-    .hero-media {
+    .visual {
+      max-width: 360px;
+      margin-inline: auto;
       order: -1;
     }
   }

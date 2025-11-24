@@ -2,128 +2,188 @@
   interface Collection {
     id: number;
     title: string;
-    description: string;
+    label: string;
     link: string;
-    image: string;
+    className: string;
   }
 
   const collections: Collection[] = [
     {
       id: 1,
       title: "Jewelry",
-      description: "Curated pieces with intention.",
+      label: "Curated pieces with intention.",
       link: "/shop#jewelry",
-      image: "/images/cat-jewelry.jpg"
+      className: "tile-wine"
     },
     {
       id: 2,
-      title: "Accessories",
-      description: "Unique details that elevate your style.",
-      link: "/shop#accessories",
-      image: "/images/cat-accessories.jpg"
+      title: "Clothing",
+      label: "Timeless pieces for the modern woman.",
+      link: "/shop#clothing",
+      className: "tile-gold"
     },
     {
       id: 3,
-      title: "Beauty",
-      description: "Self-care with elegance.",
-      link: "/shop#beauty",
-      image: "/images/cat-beauty.jpg"
+      title: "Accessories",
+      label: "Unique details that elevate your style.",
+      link: "/shop#accessories",
+      className: "tile-purple"
     },
     {
       id: 4,
-      title: "Home Decor",
-      description: "Objects that bring soul into your space.",
-      link: "/shop#home-decor",
-      image: "/images/cat-home.jpg"
+      title: "Candles & Essences",
+      label: "Objects that bring soul into your space.",
+      link: "/shop#rituals",
+      className: "tile-terracotta"
     }
   ];
 </script>
 
-<section class="collections-grid-container">
-  <header class="header">
-    <h2>Shop by category</h2>
-    <p>Discover treasures that match your ritual, mood and space.</p>
-  </header>
+<section class="collections-section">
+  <div class="inner">
+    <header class="header">
+      <p class="eyebrow">Discover by category</p>
+      <p class="intro">
+        Curated treasures for every ritual, moment and space.
+      </p>
+    </header>
 
-  <div class="collections-grid">
-    {#each collections as collection}
-      <a href={collection.link} class="collection-tile">
-        <figure class="image-wrap">
-          <img src={collection.image} alt={collection.title} loading="lazy" />
-        </figure>
-        <div class="tile-info">
-          <h3>{collection.title}</h3>
-          <p>{collection.description}</p>
-        </div>
-      </a>
-    {/each}
+    <div class="grid">
+      {#each collections as c}
+        <a href={c.link} class={"card " + c.className}>
+          <div class="shine"></div>
+          <div class="content">
+            <p class="card-title">{c.title}</p>
+            <p class="card-label">{c.label}</p>
+          </div>
+        </a>
+      {/each}
+    </div>
   </div>
 </section>
 
 <style>
-  .collections-grid-container {
-    max-width: 1180px;
+  .collections-section {
+    padding: 3.5rem 0 3rem;
+    background: linear-gradient(
+      180deg,
+      #b32538 0,
+      #b32538 40%,
+      #a51e32 100%
+    ); /* vino intenso */
+  }
+
+  .inner {
+    max-width: 1120px;
     margin: 0 auto;
+    padding: 0 1rem;
   }
 
   .header {
-    margin-bottom: 1.8rem;
+    color: #fff8f4;
+    margin-bottom: 2rem;
   }
 
-  .header h2 {
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.78rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .intro {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.6rem 1.4rem;
+    min-height: 230px;
+    border-radius: 22px;
+    text-decoration: none;
+    color: #fffdf8;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(46, 0, 10, 0.35);
+  }
+
+  .card::before {
+    content: "✶";
+    position: absolute;
+    top: 1.1rem;
+    left: 1.3rem;
+    font-size: 1.2rem;
+    opacity: 0.85;
+  }
+
+  .shine {
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.35), transparent 60%);
+    opacity: 0.9;
+    mix-blend-mode: soft-light;
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .card-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     margin-bottom: 0.4rem;
   }
 
-  .header p {
-    color: var(--text-muted);
-    font-size: 0.96rem;
+  .card-label {
+    font-size: 0.9rem;
+    opacity: 0.92;
   }
 
-  .collections-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.7rem;
+  .card:hover {
+    transform: translateY(-4px);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 24px 60px rgba(46, 0, 10, 0.45);
   }
 
-  .collection-tile {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+  /* Gradients para cada tarjeta */
+  .tile-wine {
+    background: radial-gradient(circle at top left, #f2d3db 0, #7f2035 60%, #3f0b1a 100%);
   }
 
-  .image-wrap {
-    border-radius: 20px;
-    overflow: hidden;
-    background: #e7dfd4;
+  .tile-gold {
+    background: radial-gradient(circle at top left, #f4e0bb 0, #cfa667 55%, #8a5b27 100%);
   }
 
-  .image-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 4 / 5;
-    transform: scale(1.02);
-    transition: transform 0.5s ease;
+  .tile-purple {
+    background: radial-gradient(circle at top left, #eed7f6 0, #6d327c 55%, #321238 100%);
   }
 
-  .collection-tile:hover .image-wrap img {
-    transform: scale(1.06);
+  .tile-terracotta {
+    background: radial-gradient(circle at top left, #f4c7aa 0, #b7492f 55%, #5f1f10 100%);
   }
 
-  .tile-info h3 {
-    font-size: 1.02rem;
-    font-weight: 600;
-    margin-bottom: 0.15rem;
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-  .tile-info p {
-    font-size: 0.94rem;
-    color: var(--text-muted);
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>
+

@@ -27,7 +27,11 @@
       {#each navLinks as link}
         <a
           href={link.href}
-          class="nav-link {($page.url.pathname === link.href) || ($page.url.pathname.startsWith(link.href) && link.href !== "/") ? "active" : ""}"
+          class="nav-link {($page.url.pathname === link.href) ||
+          ($page.url.pathname.startsWith(link.href) && link.href !== "/")
+            ? "active"
+            : ""}"
+          aria-label={link.name}
         >
           {link.name}
         </a>
@@ -39,14 +43,14 @@
     <slot />
   </main>
 
-  <footer class="footer footer-cream">
-    <div class="footer-inner">
+  <footer class="footer">
+    <section class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-logo">ÁGAPPE</span>
+        <p class="footer-logo">ÁGAPPE</p>
         <p class="footer-tagline">Curated treasures with elegance.</p>
       </div>
 
-      <div class="footer-columns">
+      <div class="footer-cols">
         <div>
           <h4>Explore</h4>
           <a href="/">Home</a>
@@ -60,13 +64,13 @@
         </div>
         <div>
           <h4>Follow</h4>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://tiktok.com" target="_blank" rel="noreferrer">TikTok</a>
+          <span>Instagram</span>
+          <span>TikTok</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <p class="footer-copy">
+    <p class="footer-bottom">
       © {new Date().getFullYear()} Ágappe — Elegance with intention.
     </p>
   </footer>
@@ -77,59 +81,60 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: radial-gradient(circle at top, #f9f1e7 0, var(--bg-cream) 45%, #f2e5d6 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
   }
 
-  /* HEADER CREMA, EDITORIAL */
   .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(246, 239, 230, 0.98);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.9rem 2.75rem;
-    background: linear-gradient(180deg, rgba(245, 238, 228, 0.98), rgba(237, 223, 207, 0.96));
-    border-bottom: 1px solid rgba(88, 52, 33, 0.16);
-    backdrop-filter: blur(18px);
   }
 
   .logo {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
     text-decoration: none;
+    gap: 0.6rem;
   }
 
   .logo-img {
     width: 46px;
     height: 46px;
-    border-radius: 999px;
+    border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(214, 176, 106, 0.9);
+    box-shadow: 0 0 18px rgba(207, 166, 103, 0.45);
   }
 
   .logo-text {
     font-family: var(--font-serif);
     font-weight: 600;
-    font-size: 1.32rem;
-    letter-spacing: 0.18em;
-    color: var(--color-emerald);
+    font-size: 1.2rem;
+    letter-spacing: 0.16em;
+    color: var(--emerald);
   }
 
   .nav {
     display: flex;
-    gap: 1.6rem;
-    align-items: center;
+    gap: 1.5rem;
   }
 
   .nav-link {
     position: relative;
-    font-size: 0.82rem;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
     text-decoration: none;
-    color: #2a1a11;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     padding-bottom: 0.15rem;
     transition: color 0.2s ease;
   }
@@ -139,14 +144,14 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 1px;
     width: 0;
-    background: linear-gradient(90deg, var(--color-gold), var(--color-emerald));
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--emerald));
     transition: width 0.25s ease;
   }
 
   .nav-link:hover {
-    color: var(--color-emerald);
+    color: var(--emerald);
   }
 
   .nav-link:hover::after {
@@ -154,7 +159,7 @@
   }
 
   .nav-link.active {
-    color: var(--accent-ruby);
+    color: var(--wine);
   }
 
   .nav-link.active::after {
@@ -163,89 +168,90 @@
 
   .page {
     flex: 1;
-    padding: 2.8rem 2.75rem 3.5rem;
+    padding: 2.5rem 1.5rem 3.5rem;
   }
 
-  /* FOOTER EDITORIAL PREMIUM */
   .footer {
-    padding: 2.4rem 2.75rem 1.4rem;
+    padding: 2rem 1.5rem 1rem;
+    background: linear-gradient(180deg, #f3e6d7, #e9daca);
+    border-top: 1px solid var(--border-subtle);
   }
 
   .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto 1.5rem;
     display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 3rem;
-    margin-bottom: 1.5rem;
   }
 
   .footer-logo {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 1.1rem;
   }
 
   .footer-tagline {
+    color: var(--text-muted);
     margin-top: 0.4rem;
-    color: rgba(245, 232, 210, 0.8);
-    font-size: 0.9rem;
   }
 
-  .footer-columns {
+  .footer-cols {
     display: flex;
-    gap: 3rem;
-    font-size: 0.85rem;
+    gap: 2.5rem;
+    flex-wrap: wrap;
   }
 
-  .footer-columns h4 {
+  .footer-cols h4 {
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.75rem;
-    margin-bottom: 0.8rem;
-    color: rgba(245, 232, 210, 0.9);
+    letter-spacing: 0.18em;
+    margin-bottom: 0.4rem;
   }
 
-  .footer-columns a {
+  .footer-cols a,
+  .footer-cols span {
     display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
     text-decoration: none;
-    color: rgba(245, 232, 210, 0.78);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
   }
 
-  .footer-columns a:hover {
-    color: var(--color-gold-soft);
+  .footer-cols a:hover {
+    color: var(--emerald);
   }
 
-  .footer-copy {
-    margin: 0;
-    font-size: 0.78rem;
-    color: rgba(245, 232, 210, 0.7);
-    text-align: center;
+  .footer-bottom {
+    max-width: 1120px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-muted);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     .header {
-      padding-inline: 1.3rem;
-      gap: 1rem;
+      padding: 0.7rem 1rem;
     }
 
     .nav {
-      gap: 1rem;
+      gap: 0.9rem;
+      font-size: 0.78rem;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
     .page {
-      padding-inline: 1.3rem;
-    }
-
-    .footer {
-      padding-inline: 1.3rem;
+      padding: 1.8rem 1rem 2.8rem;
     }
 
     .footer-inner {
       flex-direction: column;
-      gap: 1.8rem;
+      align-items: flex-start;
     }
   }
 </style>
